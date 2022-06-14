@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import StarContext from '../context/StarContext';
 
 function Table() {
-  const { data } = useContext(StarContext);
+  const { filteredData } = useContext(StarContext);
   return (
     <div>
+      <h1>Projeto StarWars - @Léo Barbosa</h1>
       <table>
         <thead>
           <tr>
@@ -25,8 +26,7 @@ function Table() {
         </thead>
 
         <tbody>
-          {data.map((planets, index) => (
-
+          {filteredData.map((planets, index) => (
             <tr key={ index }>
               <td>{planets.name}</td>
               <td>{planets.created}</td>
@@ -42,9 +42,7 @@ function Table() {
               <td>{planets.url}</td>
               <td>{planets.films}</td>
             </tr>
-
           ))}
-
         </tbody>
       </table>
     </div>
