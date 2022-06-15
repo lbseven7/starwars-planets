@@ -3,9 +3,17 @@ import PropTypes from 'prop-types';
 import StarContext from './StarContext';
 
 function Provider({ children }) {
+  // questão 01
   const [data, setData] = useState([]);
+  // questão 02
   const [filteredData, setFilteredData] = useState([]);
   const [filterByname, setFilterByname] = useState({ name: '' });
+  // questão 03
+  const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+
+  const [column, setColumn] = useState('population');
+  const [comparison, setComparison] = useState('maior que');
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,15 +25,41 @@ function Provider({ children }) {
   }, []);
 
   useEffect(() => {
-    const filters = data.filter((planet) => planet.name.toLowerCase()
+    const filtersPlanet = data.filter((planet) => planet.name.toLowerCase()
       .includes(filterByname.name.toLowerCase()));
-    setFilteredData(filters);
-  }, [filterByname.name, data]);
 
-  const value = { data, setFilterByname, filteredData, filterByname };
+    const filtersByNumeric = filterByNumericValues
+      .reduce((acc, current) => acc.filter((planet) => {
+        switch (current.comparison) {
+        case 'maior que':
+          return Number(planet[current.column]) > Number(current.value);
+        case 'menor que':
+          return Number(planet[current.column]) < Number(current.value);
+        case 'igual a':
+          return Number(planet[current.column]) === Number(current.value);
+        default:
+          return true;
+        }
+      }), filtersPlanet);
+    setFilteredData(filtersByNumeric);
+  }, [filterByname.name, data, filterByNumericValues]);
+
+  const contextValue = {
+    data,
+    column,
+    setColumn,
+    comparison,
+    setComparison,
+    value,
+    setValue,
+    setFilterByname,
+    filteredData,
+    filterByname,
+    setFilterByNumericValues,
+    filterByNumericValues };
 
   return (
-    <StarContext.Provider value={ value }>
+    <StarContext.Provider value={ contextValue }>
       { children }
     </StarContext.Provider>
   );

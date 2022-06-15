@@ -5,7 +5,6 @@ function Table() {
   const { filteredData } = useContext(StarContext);
   return (
     <div>
-      <h1>Projeto StarWars - @Léo Barbosa</h1>
       <table>
         <thead>
           <tr>
