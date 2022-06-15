@@ -3,6 +3,8 @@ import StarContext from '../context/StarContext';
 
 function Form() {
   const {
+    opcoes,
+    setOpcoes,
     column,
     setColumn,
     comparison,
@@ -24,7 +26,13 @@ function Form() {
     setFilterByNumericValues([
       ...filterByNumericValues, newFilter,
     ]);
+    const opcoesFilter = opcoes.filter((option) => option !== column);
+    setOpcoes(opcoesFilter);
   };
+
+  // const handleOrder = () => {
+
+  // };
 
   return (
     <div>
@@ -48,11 +56,8 @@ function Form() {
             onChange={ ({ target }) => setColumn(target.value) }
             value={ column }
           >
-            <option>population</option>
-            <option>orbital_period</option>
-            <option>diameter</option>
-            <option>rotation_period</option>
-            <option>surface_water</option>
+            {opcoes.map((option, index) => <option key={ index }>{option}</option>)}
+
           </select>
         </label>
         <label htmlFor="comparison">
@@ -84,6 +89,13 @@ function Form() {
         >
           Filter
         </button>
+
+        {/* <button
+          onClick={ handleOrderOptions }
+          type="button"
+        >
+          Ordenar
+        </button> */}
       </form>
     </div>
   );

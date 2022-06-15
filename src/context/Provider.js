@@ -10,10 +10,17 @@ function Provider({ children }) {
   const [filterByname, setFilterByname] = useState({ name: '' });
   // questão 03
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
-
+  // questão 04
   const [column, setColumn] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [value, setValue] = useState(0);
+  const [opcoes, setOpcoes] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,6 +52,8 @@ function Provider({ children }) {
   }, [filterByname.name, data, filterByNumericValues]);
 
   const contextValue = {
+    opcoes,
+    setOpcoes,
     data,
     column,
     setColumn,
