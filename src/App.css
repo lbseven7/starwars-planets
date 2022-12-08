@@ -36,8 +36,8 @@ h1:hover {
 
 /* TABELA */
 table th {
-  background: rgb(58, 60, 52);
-  border: 2px solid rgb(96, 96, 96);
+  background: rgba(174, 193, 3, 0.165);
+  border: 2px solid rgba(96, 96, 96, 0.319);
   color: white;
   font-size: 0.7rem;
   padding: 0.7rem;
@@ -50,7 +50,7 @@ table th {
 } */
 
 table td {
-  background: rgb(28, 28, 28);
+  background: rgba(57, 57, 57, 0.455);
   color: rgb(253, 251, 251);
   font-size: 0.7rem;
   padding: 7px;
@@ -72,7 +72,7 @@ form input {
 }
 
 form button {
-  background: rgb(70, 7, 87);
+  background: rgba(70, 7, 87, 0.44);
   border: none;
   color: white;
   cursor: pointer;
